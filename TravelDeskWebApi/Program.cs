@@ -22,7 +22,8 @@ namespace TravelDeskWebApi
             builder.Services.AddCors(x => x.AddPolicy("AllowOrigin",options=>options.AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader()));
-            
+
+            builder.Services.AddTransient<ILoginRepo,LoginRepo>();
             builder.Services.AddTransient<IRoleRepo, RoleRepo>();
             builder.Services.AddTransient<IUserRepo, UserRepo>();
             builder.Services.AddTransient<IDepartmentRepo, DepartmentRepo >();

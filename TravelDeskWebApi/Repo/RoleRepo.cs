@@ -17,5 +17,9 @@ namespace TravelDeskWebApi.Repo
         {
             return _context.Roles.ToList();
         }
+        public Role GetRoleById(int id)
+        {
+            return _context.Roles.FirstOrDefault(x => x.RoleId == id);
+        }
     }
 }
