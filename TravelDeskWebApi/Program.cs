@@ -1,45 +1,54 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using TravelDeskWebApi.Context;
 using TravelDeskWebApi.IRepo;
 using TravelDeskWebApi.Repo;
 
-namespace TravelDeskWebApi
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Add services to the container.
+        builder.Services.AddControllers();
+        builder.Services.AddCors(options =>
         {
-            var builder = WebApplication.CreateBuilder(args);
+            options.AddPolicy("AllowOrigin", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+        });
 
-            // Add services to the container.
+        builder.Services.AddTransient<ILoginRepo, LoginRepo>();
+        builder.Services.AddTransient<IRoleRepo, RoleRepo>();
+        builder.Services.AddTransient<IUserRepo, UserRepo>();
+        builder.Services.AddTransient<IDepartmentRepo, DepartmentRepo>();
+        builder.Services.AddDbContext<TravelDbContext>(x => x.UseSqlServer(builder.Configuration["ConnectionStrings:DBCS"]));
 
-            builder.Services.AddControllers();
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "your_issuer",
+                    ValidAudience = "your_audience",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_secret_key"))
+                };
+            }); 
 
-            //builder.Services.AddControllers().AddJsonOptions(x =>
-            //    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+        var app = builder.Build();
 
-            builder.Services.AddCors(x => x.AddPolicy("AllowOrigin",options=>options.AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader()));
-            
-            builder.Services.AddTransient<IRoleRepo, RoleRepo>();
-            builder.Services.AddTransient<IUserRepo, UserRepo>();
-            builder.Services.AddTransient<IDepartmentRepo, DepartmentRepo >();
-            builder.Services.AddDbContext<TravelDbContext>(x => x.UseSqlServer(builder.Configuration["ConnectionStrings:DBCS"]));
+        // Configure the HTTP request pipeline.
+        app.UseAuthentication();
+        app.UseAuthorization();
+        app.UseCors("AllowOrigin");
 
+        app.MapControllers();
 
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-
-            app.UseAuthorization();
-            app.UseCors("AllowOrigin");
-
-
-            app.MapControllers();
-
-            app.Run();
-        }
+        app.Run();
     }
 }
