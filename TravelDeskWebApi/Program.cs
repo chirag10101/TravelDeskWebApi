@@ -7,13 +7,11 @@ using TravelDeskWebApi.Context;
 using TravelDeskWebApi.IRepo;
 using TravelDeskWebApi.Repo;
 
-namespace TravelDeskWebApi
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+        var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers();
             builder.Services.AddCors(x => x.AddPolicy("AllowOrigin",options=>options.AllowAnyOrigin()
@@ -41,7 +39,7 @@ namespace TravelDeskWebApi
             });
             builder.Services.AddAuthorization();
 
-            var app = builder.Build();
+        var app = builder.Build();
 
             app.UseCors("AllowOrigin");
 
@@ -52,10 +50,8 @@ namespace TravelDeskWebApi
             
             
 
+        app.MapControllers();
 
-            app.MapControllers();
-
-            app.Run();
-        }
+        app.Run();
     }
 }

@@ -8,6 +8,8 @@ using System.Security.Claims;
 using System.Text;
 using TravelDeskWebApi.IRepo;
 using TravelDeskWebApi.Model;
+using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
+using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace TravelDeskWebApi.Controllers
 {
@@ -30,6 +32,7 @@ namespace TravelDeskWebApi.Controllers
             _roleRepo = roleRepo;
             _departmentRepo = departmentRepo;
         }
+
         [HttpPost]
         [AllowAnonymous]
         public IActionResult Login(LoginUser loginUser)
@@ -45,6 +48,21 @@ namespace TravelDeskWebApi.Controllers
             {
                 return BadRequest();
             }
+
+        }   
+
+        private string GenerateJSONWebToken(Login user)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
+              _config["Jwt:Issuer"],
+              null,
+              expires: DateTime.Now.AddMinutes(120),
+              signingCredentials: credentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
         private string GenerateJSONWebToken(User user)
