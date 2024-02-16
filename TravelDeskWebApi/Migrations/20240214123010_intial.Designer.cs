@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TravelDeskWebApi.Context;
 
@@ -11,9 +12,11 @@ using TravelDeskWebApi.Context;
 namespace TravelDeskWebApi.Migrations
 {
     [DbContext(typeof(TravelDbContext))]
-    partial class TravelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240214123010_intial")]
+    partial class intial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -514,14 +517,14 @@ namespace TravelDeskWebApi.Migrations
                             UserId = 1,
                             Address = "Noida",
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2024, 2, 15, 11, 59, 19, 390, DateTimeKind.Local).AddTicks(4717),
+                            CreatedOn = new DateTime(2024, 2, 14, 18, 0, 9, 829, DateTimeKind.Local).AddTicks(3312),
                             DepartmentId = 1,
                             Email = "ckkapadiya@geduservices.com",
                             FirstName = "Chirag",
                             IsActive = true,
                             LastName = "Kapadiya",
                             MobileNumber = "8080977727",
-                            Password = "Q2hpcmFnQDEyMw==",
+                            Password = "Chirag@123",
                             RoleId = 1
                         },
                         new
@@ -529,7 +532,7 @@ namespace TravelDeskWebApi.Migrations
                             UserId = 2,
                             Address = "Delhi",
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2024, 2, 15, 11, 59, 19, 390, DateTimeKind.Local).AddTicks(4724),
+                            CreatedOn = new DateTime(2024, 2, 14, 18, 0, 9, 829, DateTimeKind.Local).AddTicks(3320),
                             DepartmentId = 2,
                             Email = "animesh@gmail.com",
                             FirstName = "Animesh",
@@ -537,7 +540,7 @@ namespace TravelDeskWebApi.Migrations
                             LastName = "Pandey",
                             ManagerId = 1,
                             MobileNumber = "9873849999",
-                            Password = "QW5pbWVzaCExMjM=",
+                            Password = "Animesh!123",
                             RoleId = 3
                         },
                         new
@@ -545,7 +548,7 @@ namespace TravelDeskWebApi.Migrations
                             UserId = 3,
                             Address = "Gurugram",
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2024, 2, 15, 11, 59, 19, 390, DateTimeKind.Local).AddTicks(4728),
+                            CreatedOn = new DateTime(2024, 2, 14, 18, 0, 9, 829, DateTimeKind.Local).AddTicks(3325),
                             DepartmentId = 3,
                             Email = "saurav@gmail.com",
                             FirstName = "Saurav",
@@ -553,7 +556,7 @@ namespace TravelDeskWebApi.Migrations
                             LastName = "Tandon",
                             ManagerId = 2,
                             MobileNumber = "2378498883",
-                            Password = "U2F1cmF2ITEyMzQ=",
+                            Password = "Saurav!1234",
                             RoleId = 2
                         },
                         new
@@ -561,7 +564,7 @@ namespace TravelDeskWebApi.Migrations
                             UserId = 4,
                             Address = "Pune",
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2024, 2, 15, 11, 59, 19, 390, DateTimeKind.Local).AddTicks(4732),
+                            CreatedOn = new DateTime(2024, 2, 14, 18, 0, 9, 829, DateTimeKind.Local).AddTicks(3330),
                             DepartmentId = 3,
                             Email = "priya@gmail.com",
                             FirstName = "Priya",
@@ -569,7 +572,7 @@ namespace TravelDeskWebApi.Migrations
                             LastName = "Jaiswal",
                             ManagerId = 2,
                             MobileNumber = "9876545679",
-                            Password = "UHJpeWFAMTIz",
+                            Password = "Priya@123",
                             RoleId = 3
                         });
                 });

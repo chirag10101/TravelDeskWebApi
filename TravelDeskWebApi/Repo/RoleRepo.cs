@@ -11,15 +11,16 @@ namespace TravelDeskWebApi.Repo
         public RoleRepo(TravelDbContext context)
         {
             _context = context;
-
         }
+
         public List<Role> GetAllRoles()
         {
             return _context.Roles.ToList();
         }
+
         public Role GetRoleById(int id)
         {
-            return _context.Roles.FirstOrDefault(x => x.RoleId == id);
+            return _context.Roles.FirstOrDefault(x=>x.RoleId==id);
         }
     }
 }

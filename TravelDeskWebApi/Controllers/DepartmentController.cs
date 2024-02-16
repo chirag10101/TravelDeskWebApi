@@ -20,5 +20,11 @@ namespace TravelDeskWebApi.Controllers
         {
             return _repo.GetAllDepts();
         }
+
+        [HttpGet("{id}")]
+        public Department GetById(int id)
+        {
+            return _repo.GetDepartmentById(id);
+        }
     }
 }

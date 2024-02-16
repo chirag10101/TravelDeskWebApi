@@ -21,5 +21,11 @@ namespace TravelDeskWebApi.Controllers
         {
             return _repo.GetAllRoles();
         }
+
+        [HttpGet("{id}")]
+        public Role GetById(int id)
+        {
+            return _repo.GetRoleById(id);
+        }
     }
 }

@@ -17,5 +17,10 @@ namespace TravelDeskWebApi.Repo
         {
             return _context.Departments.ToList();
         }
+
+        public Department GetDepartmentById(int id)
+        {
+            return _context.Departments.FirstOrDefault(x => x.DepartmentId == id);
+        }
     }
 }
