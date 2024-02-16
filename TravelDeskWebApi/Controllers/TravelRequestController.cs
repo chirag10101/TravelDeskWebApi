@@ -123,7 +123,7 @@ namespace TravelDeskWebApi.Controllers
 
         [HttpPost]
         [Route("Upload")]
-        public async Task<IActionResult> UploadFiles( [FromForm] IFormFile? aadharCardFile, [FromForm] IFormFile? passportFile, [FromForm] IFormFile? visaFile)
+        public async Task<IActionResult> UploadFiles(  IFormFile? aadharCardFile,  IFormFile? passportFile,  IFormFile? visaFile)
         {
             try
             {
