@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TravelDeskWebApi.IRepo;
 using TravelDeskWebApi.Model;
+using TravelDeskWebApi.ViewModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TravelDeskWebApi.Controllers
 {
@@ -217,6 +220,123 @@ namespace TravelDeskWebApi.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("GetAirTicketOnlyRequest/{requestId}")]
+        public async Task<IActionResult> GetAirTicketOnlyRequest(int requestId)
+        {
+            var data = _repo.GetAirTicketOnlyView(requestId);
+            if (data == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(data);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetHotelOnlyRequest/{requestId}")]
+        public async Task<IActionResult> GetHotelOnlyRequest(int requestId)
+        {
+            var data = _repo.GetHotelOnlyView(requestId);
+            if (data == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(data);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetAirHotelBothRequest/{requestId}")]
+        public async Task<IActionResult> GetAirHotelBothRequest(int requestId)
+        {
+            var data = _repo.GetAirTicketHotelBothView(requestId);
+            if (data == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(data);
+            }
+        }
+
+        [HttpPut]
+        [Route("UpdateStatusAndReason")]
+        public async Task<IActionResult> UpdateStatusAndReason(StatusAndReasonView statusAndReason)
+        {
+            if(await _repo.UpdateStatusAndReason(statusAndReason))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+
+        [HttpGet]
+        [Route("GetAllManagerRequests/{managerId}")]
+        public async Task<IActionResult> GetAllManagerRequests(int managerId)
+        {
+            var data = _repo.GetTravelRequestsByManagerId(managerId);
+            if (data == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(data);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetAllHRTravelAdminRequests")]
+        public async Task<IActionResult> GetAllHRTravelAdminRequests()
+        {
+            var data =  _repo.GetViewRequestsForHrTravelAdmin();
+            if (data == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(data);
+            }
+        }
+
+        [HttpPut]
+        [Route("DeleteRequest/{requestId}")]
+        public async Task<IActionResult> DeleteRequest(int requestId)
+            {
+            if (await _repo.DeleteRequest(requestId))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPut]
+        [Route("GenerateBookingId/{requestId}")]
+        public async Task<IActionResult> GenerateBookingId(int requestId)
+        {
+            if (await _repo.GenerateBookingId(requestId))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
 
         //[HttpPost]
         //[Route("AddToHotelBooking")]

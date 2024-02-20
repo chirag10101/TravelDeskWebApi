@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TravelDeskWebApi.Context;
 
@@ -11,9 +12,11 @@ using TravelDeskWebApi.Context;
 namespace TravelDeskWebApi.Migrations
 {
     [DbContext(typeof(TravelDbContext))]
-    partial class TravelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240218065141_addedUpdatedOn")]
+    partial class addedUpdatedOn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -517,7 +520,7 @@ namespace TravelDeskWebApi.Migrations
                             UserId = 1,
                             Address = "Noida",
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2024, 2, 19, 12, 36, 23, 113, DateTimeKind.Local).AddTicks(6581),
+                            CreatedOn = new DateTime(2024, 2, 18, 12, 21, 40, 594, DateTimeKind.Local).AddTicks(7221),
                             DepartmentId = 1,
                             Email = "ckkapadiya@geduservices.com",
                             FirstName = "Chirag",
@@ -532,7 +535,7 @@ namespace TravelDeskWebApi.Migrations
                             UserId = 2,
                             Address = "Delhi",
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2024, 2, 19, 12, 36, 23, 113, DateTimeKind.Local).AddTicks(6601),
+                            CreatedOn = new DateTime(2024, 2, 18, 12, 21, 40, 594, DateTimeKind.Local).AddTicks(7260),
                             DepartmentId = 2,
                             Email = "animesh@gmail.com",
                             FirstName = "Animesh",
@@ -548,7 +551,7 @@ namespace TravelDeskWebApi.Migrations
                             UserId = 3,
                             Address = "Gurugram",
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2024, 2, 19, 12, 36, 23, 113, DateTimeKind.Local).AddTicks(6611),
+                            CreatedOn = new DateTime(2024, 2, 18, 12, 21, 40, 594, DateTimeKind.Local).AddTicks(7265),
                             DepartmentId = 3,
                             Email = "saurav@gmail.com",
                             FirstName = "Saurav",
@@ -564,7 +567,7 @@ namespace TravelDeskWebApi.Migrations
                             UserId = 4,
                             Address = "Pune",
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2024, 2, 19, 12, 36, 23, 113, DateTimeKind.Local).AddTicks(6622),
+                            CreatedOn = new DateTime(2024, 2, 18, 12, 21, 40, 594, DateTimeKind.Local).AddTicks(7271),
                             DepartmentId = 3,
                             Email = "priya@gmail.com",
                             FirstName = "Priya",
@@ -574,22 +577,6 @@ namespace TravelDeskWebApi.Migrations
                             MobileNumber = "9876545679",
                             Password = "UHJpeWFAMTIz",
                             RoleId = 3
-                        },
-                        new
-                        {
-                            UserId = 5,
-                            Address = "Kolkata",
-                            CreatedBy = 1,
-                            CreatedOn = new DateTime(2024, 2, 19, 12, 36, 23, 113, DateTimeKind.Local).AddTicks(6633),
-                            DepartmentId = 1,
-                            Email = "abhinav@gmail.com",
-                            FirstName = "Abhinav",
-                            IsActive = true,
-                            LastName = "Deep",
-                            ManagerId = 2,
-                            MobileNumber = "9878687737",
-                            Password = "QWJoaW5hdkAxMjM=",
-                            RoleId = 4
                         });
                 });
 

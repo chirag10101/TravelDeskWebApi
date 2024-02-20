@@ -82,8 +82,25 @@ namespace TravelDeskWebApi.Context
                 new User { UserId = 3, FirstName = "Saurav", LastName = "Tandon", ManagerId = 2, MobileNumber= "2378498883", Password=EncodePasswordToBase64("Saurav!1234"), CreatedBy=1,
                Address="Gurugram", DepartmentId=3, RoleId=2, Email="saurav@gmail.com", IsActive=true, CreatedOn= DateTime.Now},
                 new User { UserId = 4, FirstName = "Priya", LastName = "Jaiswal", ManagerId = 2, MobileNumber= "9876545679", Password=EncodePasswordToBase64("Priya@123"), CreatedBy=1,
-               Address="Pune", DepartmentId=3, RoleId=3, Email="priya@gmail.com", IsActive=true, CreatedOn= DateTime.Now}
-                
+               Address="Pune", DepartmentId=3, RoleId=3, Email="priya@gmail.com", IsActive=true, CreatedOn= DateTime.Now},
+                new User
+                {
+                    UserId = 5,
+                    FirstName = "Abhinav",
+                    LastName = "Deep",
+                    ManagerId = 2,
+                    MobileNumber = "9878687737",
+                    Password = EncodePasswordToBase64("Abhinav@123"),
+                    CreatedBy = 1,
+                    Address = "Kolkata",
+                    DepartmentId = 1,
+                    RoleId = 4,
+                    Email = "abhinav@gmail.com",
+                    IsActive = true,
+                    CreatedOn = DateTime.Now
+                }
+
+
             );
         }
 
