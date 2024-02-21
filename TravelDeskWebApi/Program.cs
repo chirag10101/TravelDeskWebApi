@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.Text;
 using System.Text.Json.Serialization;
 using TravelDeskWebApi.Context;
@@ -12,8 +13,13 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        Log.Logger = new LoggerConfiguration().MinimumLevel.Information()
+            .WriteTo.File("Log/user.txt", rollingInterval: RollingInterval.Day).CreateLogger();
 
-            builder.Services.AddControllers();
+        builder.Host.UseSerilog();
+        builder.Logging.AddConsole();
+
+        builder.Services.AddControllers();
             builder.Services.AddCors(x => x.AddPolicy("AllowOrigin",options=>options.AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader()));
@@ -23,7 +29,11 @@ public class Program
             builder.Services.AddTransient<ITravelRequestRepo, TravelRequestRepo>();
             builder.Services.AddTransient<IDepartmentRepo, DepartmentRepo >();
             builder.Services.AddDbContext<TravelDbContext>(x => x.UseSqlServer(builder.Configuration["ConnectionStrings:DBCS"]));
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        //builder.Services.AddMemoryCache();
+        //builder.Services.AddLazyCache();
+
+
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -46,9 +56,8 @@ public class Program
             // Configure the HTTP request pipeline.
             app.UseAuthentication();
             app.UseAuthorization();
-            
-            
-            
+
+
 
         app.MapControllers();
 

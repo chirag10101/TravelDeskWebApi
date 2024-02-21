@@ -101,7 +101,7 @@ namespace TravelDeskWebApi.Repo
 
         public List<User> GetManagers()
         {
-            return _context.Users.Where(x => x.RoleId == 3 || x.RoleId == 1).ToList();
+            return _context.Users.Where(x => x.IsActive==true &&( x.RoleId == 3 || x.RoleId == 1) ).ToList();
         }
 
         public async Task<bool> Edituser(User user)
@@ -125,7 +125,7 @@ namespace TravelDeskWebApi.Repo
             u.ManagerId = user.ManagerId;
             u.RoleId = user.RoleId;
             u.DepartmentId = user.DepartmentId;
-
+            u.UpdatedOn = DateTime.Now;
             _context.Users.Update(u);
             await _context.SaveChangesAsync();
             return true;
@@ -151,7 +151,7 @@ namespace TravelDeskWebApi.Repo
                 throw new Exception("Error in base64Encode" + ex.Message);
             }
         }
-        //this function Convert to Decord your Password
+
         public string DecodeFrom64(string encodedData)
         {
             System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();

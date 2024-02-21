@@ -82,6 +82,7 @@ namespace TravelDeskWebApi.Repo
                  ManagerName = manager.FirstName + " " + manager.LastName,
                  StatusName = status.StatusName,
                  BookingTypeName = bookingType.BookingTypeName,
+
              }).ToList();
             return query;
         }
@@ -105,6 +106,7 @@ namespace TravelDeskWebApi.Repo
                  DepartmentName = deparment.DepartmentName,
                  UserId = request.UserId,
                  BookingTypeName = bookingType.BookingTypeName,
+                 BookingId = request.BookingId,
              }).ToList();
             return query;
         }
@@ -139,6 +141,8 @@ namespace TravelDeskWebApi.Repo
                  PassportNo = request.PassportNo,
                  FlightDate = request.FlightDate,
                  CreatedOn = request.CreatedOn,
+                 ReasonForRejection = request.StatusReason,
+                 BookingId = request.BookingId,
 
              }).FirstOrDefault();
             return query;
@@ -174,6 +178,8 @@ namespace TravelDeskWebApi.Repo
                  MealTypeName = mealType.MealName,
                  HotelLocationName = hotelLocation.City+", "+ hotelLocation.Country,
                  CreatedOn = request.CreatedOn,
+                 ReasonForRejection = request.StatusReason,
+                 BookingId = request.BookingId,
              }).FirstOrDefault();
             return query;
         }
@@ -216,6 +222,8 @@ namespace TravelDeskWebApi.Repo
                  PassportNo = request.PassportNo,
                  FlightDate = request.FlightDate,
                  CreatedOn = request.CreatedOn,
+                 ReasonForRejection = request.StatusReason,
+                 BookingId = request.BookingId,
              }).FirstOrDefault();
             return result;
         }
@@ -262,6 +270,7 @@ namespace TravelDeskWebApi.Repo
                 request.StatusReason = statusAndReason.StatusReason;
                 request.UpdatedOn = DateTime.Now;
                 request.UpdatedBy = statusAndReason.UpdatedBy;
+
                 _context.TravelRequests.Update(request);
                 _context.SaveChanges();
                 return true;

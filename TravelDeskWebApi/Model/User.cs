@@ -28,7 +28,7 @@ namespace TravelDeskWebApi.Model
         public string Email { get; set; }
 
         [Required]
-        [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!#%*?&])[A-Za-z\\d@$!%*#?&]{8,}$")]
+        //[RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!#%*?&])[A-Za-z\\d@$!%*#?&]{8,}$")]
         public string Password { get; set; }
         
         [Required]

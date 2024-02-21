@@ -126,7 +126,7 @@ namespace TravelDeskWebApi.Controllers
 
         [HttpPost]
         [Route("Upload")]
-        public async Task<IActionResult> UploadFiles(  IFormFile? aadharCardFile,  IFormFile? passportFile,  IFormFile? visaFile)
+        public async Task<IActionResult> UploadFiles(  IFormFile? aadharCardFile,  IFormFile? passportFile,  IFormFile? visaFile , string employeeName, string userId)
         {
             try
             {
@@ -135,7 +135,7 @@ namespace TravelDeskWebApi.Controllers
                 if (aadharCardFile != null)
                 {
                     // Save aadharFile in the current directory
-                    var aadharFileName = Path.Combine(Directory.GetCurrentDirectory(),  "_" + "AadharCard");
+                    var aadharFileName = Path.Combine(Directory.GetCurrentDirectory(),  "_" + "AadharCard" + "_"+ employeeName + "_" + userId);
                     using (var stream = new FileStream(aadharFileName, FileMode.Create))
                     {
                         await aadharCardFile.CopyToAsync(stream);
@@ -146,7 +146,7 @@ namespace TravelDeskWebApi.Controllers
                 if (passportFile != null)
                 {
                     // Save passportFile in the current directory
-                    var passportFileName = Path.Combine(Directory.GetCurrentDirectory(), "_" + "PassPort");
+                    var passportFileName = Path.Combine(Directory.GetCurrentDirectory(), "_" + "PassPort" + "_" + employeeName + "_" + userId);
                     using (var stream = new FileStream(passportFileName, FileMode.Create))
                     {
                         await passportFile.CopyToAsync(stream);
@@ -157,7 +157,7 @@ namespace TravelDeskWebApi.Controllers
                 if (visaFile != null)
                 {
                     // Save passportFile in the current directory
-                    var visaFileName = Path.Combine(Directory.GetCurrentDirectory(), "_" + "Visa");
+                    var visaFileName = Path.Combine(Directory.GetCurrentDirectory(), "_" + "Visa" + "_" + employeeName + "_" + userId);
                     using (var stream = new FileStream(visaFileName, FileMode.Create))
                     {
                         await visaFile.CopyToAsync(stream);

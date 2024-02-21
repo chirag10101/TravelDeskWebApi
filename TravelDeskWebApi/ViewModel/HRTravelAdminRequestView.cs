@@ -9,5 +9,6 @@
         public string ReasonForTravelling { get; set; }
         public string BookingTypeName { get; set; }
         public string DepartmentName { get; set; }
+        public int? BookingId { get; set; }
     }
 }

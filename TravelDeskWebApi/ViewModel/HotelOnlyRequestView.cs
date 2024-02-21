@@ -18,5 +18,7 @@
         public string StatusName { get; set; }
         public DateTime CreatedOn { get; set; }
         public string ReasonForRejection { get; set; }
+
+        public int? BookingId { get; set; }
     }
 }
